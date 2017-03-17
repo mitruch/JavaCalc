@@ -1,7 +1,7 @@
 import java.util.Scanner;
 /**
  * 
- * @author Admin
+ * @author mitruch
  *
  */
 public class Main {
@@ -12,30 +12,38 @@ public class Main {
 		boolean isEnd = true;
 		
 		System.out.println("MENU");
-		System.out.println("Choose 'p' to start enter numbers");
-		System.out.println("Choose 'f' to load from file");
+		System.out.println("Choose 's' to start enter numbers");
+		System.out.println("Choose 'l' to load from file");
+		System.out.println("Choose 'e' to exit");
 	
 		do {
 			choice = keyboard.nextLine();
 			switch (choice) {
-				case "p" : {
+				case "s" : {
 					System.out.println("jeden");
 				//...
 					break;
 				}
-				case "f" : {
+				case "l" : {
 					//...
 					System.out.println("ZERO");
 					break;
 				}
+				case "e" : {
+					System.out.println("...Exit");
+					isEnd = true;
+					keyboard.close();
+					break;
+				}
 				default : {
-				System.out.println("Nie");
+				System.out.println("This option is undefined");
 				isEnd = false;
 				break;
 				}
 			}
-		
+	
 		} while (!isEnd);
+
 	}
 	/**
 	 * 
@@ -44,9 +52,9 @@ public class Main {
 		
 	public static void main(String[] args) {
 		  showMenu();
-
+		  
 		
 	}
 	
-	
+
 }
