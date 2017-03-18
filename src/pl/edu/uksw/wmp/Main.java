@@ -16,8 +16,8 @@ public class Main {
 	/**
 	 * Show menu and navigate it.
 	 * 's' to start enter numbers
-	 * 	'l' to load from file
-	 *	'e' to exit");
+	 * 'l' to load from file
+	 * 'e' to exit;
 	 */
 	public static void showMenu() {
 

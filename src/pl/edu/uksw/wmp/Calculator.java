@@ -52,31 +52,25 @@ public class Calculator implements Readable {
 	private double calculate(String operation, String delim) {		    		
       	double result = 0.0;
       	
-      	// validate: at least one char, operations, numbers
       	if (!operation.matches("^.[+-/*/0-9]*$")) {
         	return result;
       	}
 		
       	double number = 0.0;
         String operator = null;
-		// StringTokenizer strToken = new StringTokenizer(operation, "+-/*", true);
       	StringTokenizer strToken = new StringTokenizer(operation, delim, true);
 		
 		while (strToken.hasMoreElements()) {
           
 			String nextOperator = strToken.nextToken();          	
-		    // System.out.println( "operations(" + operations + "): next operator: " + nextOperator);
 			  
 			if (NumberUtils.isCreatable(nextOperator)) {
-              	// System.out.println("is number");
 				number = NumberUtils.toDouble(nextOperator);
               	result = (operator != null) ? operate(result, number, operator) : number;
               
 			} else {
-              	// System.out.println("is an operator");
-              
+				
 				if (nextOperator.length() > 1) {
-                	// System.out.println("is an expression");
 					number = calculate(nextOperator, "*/");
 					result = (operator != null) ? operate(result, number, operator) : number;
                   
@@ -88,7 +82,7 @@ public class Calculator implements Readable {
 		System.out.println(operation + "=" + result);
 		return result;
 	}
-	
+
 	/**
 	 * Match an operator to valid calculation.
 	 * 
