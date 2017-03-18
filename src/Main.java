@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.io.FileNotFoundException;
+
 /**
  * 
  * @author mitruch
@@ -21,22 +22,31 @@ public class Main {
 			choice = keyboard.nextLine();
 			switch (choice) {
 				case "s" : {
-					System.out.println("jeden");
-				//...
+					 Calculator calc = new Calculator();
+					 String operation;
+					 do {
+						 System.out.println("Write what You need to calculate:  ");
+						 operation = keyboard.nextLine();
+						 if(!operation.equals("end")){
+							 calc.calculate(operation);
+						 }
+					  } while (!operation.endsWith("end"));
+					showMenu();
+					isEnd = true;
 					break;
-				}
+				} 
 				case "l" : {
 					String fileName;
-					Readable readingFile = new Calculator();
+					Readable readingCalc = new Calculator();
 					System.out.println("Fill in name of file: ");
 					fileName = keyboard.nextLine();
 					try {
-						readingFile.readFromFile(fileName);
+						readingCalc.readFromFile(fileName);
 					} catch (FileNotFoundException e) {
 						e.printStackTrace();
 					}
-					isEnd = false;
 					showMenu();
+					isEnd = true;
 					break;
 				}
 				case "e" : {
@@ -53,7 +63,6 @@ public class Main {
 			}
 	
 		} while (!isEnd);
-
 	}
 
 	/**
@@ -63,6 +72,4 @@ public class Main {
 	public static void main(String[] args) {
 			showMenu();
 	}
-	
-
 }
