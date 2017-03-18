@@ -51,6 +51,7 @@ public class Calculator implements Readable {
 	 */
 	private double calculate(String operation, String delim) {		    		
       	double result = 0.0;
+      	
       	// validate: at least one char, operations, numbers
       	if (!operation.matches("^.[+-/*/0-9]*$")) {
         	return result;
