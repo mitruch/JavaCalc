@@ -8,8 +8,8 @@ import java.io.FileNotFoundException;
  * @author Katarzyna Mitrus
  * 
  * Java programming exercises. 
- * Implementation of simple calculator 
- * witch reads parameters from file and from user.
+ * Implementation of simple calculator with order of operations.
+ * Parameters are read from file or user.
  * 
  */
 public class Main {

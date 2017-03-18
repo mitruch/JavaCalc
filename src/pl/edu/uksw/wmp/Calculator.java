@@ -14,8 +14,6 @@ import org.apache.commons.lang3.math.NumberUtils;
  */
 
 public class Calculator implements Readable {
-	private int result;
-	
 	/**
 	 * Read from *.txt file.
 	 * 
@@ -34,70 +32,78 @@ public class Calculator implements Readable {
 	    in.close();
 	}
 	
+	/**
+	 * The overload method based on recursive rules.
+	 * 
+	 * @param 	operation
+	 * @return	call overload method double calculate(String,String) 
+	 */
+	public double calculate(String operation) {
+     	return calculate(operation, "+-");
+  	}
+	
 	/** 
 	 * All calculations needed to get result.
 	 * 
-	 * @param operation 	the simply algebraic expression
+	 * @param operation 	the algebraic expression
+	 * @param delim			the delimiters witch delimit numbers 
 	 * @return 				result of math operations
 	 */
-	public Integer calculate(String operation) {
+	private double calculate(String operation, String delim) {		    		
+      	double result = 0.0;
+      	// validate: at least one char, operations, numbers
+      	if (!operation.matches("^.[+-/*/0-9]*$")) {
+        	return result;
+      	}
 		
-		int number;
-		String operator = null;
-		StringTokenizer strToken = new StringTokenizer(operation, "+-/*", true);
+      	double number = 0.0;
+        String operator = null;
+		// StringTokenizer strToken = new StringTokenizer(operation, "+-/*", true);
+      	StringTokenizer strToken = new StringTokenizer(operation, delim, true);
 		
 		while (strToken.hasMoreElements()) {
-			
-			String nextOperator = strToken.nextToken();
-			
+          
+			String nextOperator = strToken.nextToken();          	
+		    // System.out.println( "operations(" + operations + "): next operator: " + nextOperator);
+			  
 			if (NumberUtils.isCreatable(nextOperator)) {
-				number = NumberUtils.toInt(nextOperator);
-				if (operator != null) {
-					operate(number, operator);
-				} 
-				else {
-					this.result = number;
-				}
+              	// System.out.println("is number");
+				number = NumberUtils.toDouble(nextOperator);
+              	result = (operator != null) ? operate(result, number, operator) : number;
+              
 			} else {
-				operator = nextOperator;
+              	// System.out.println("is an operator");
+              
+				if (nextOperator.length() > 1) {
+                	// System.out.println("is an expression");
+					number = calculate(nextOperator, "*/");
+					result = (operator != null) ? operate(result, number, operator) : number;
+                  
+              	} else {
+                  	operator = nextOperator;
+              	}
 			}
 		}
-		
 		System.out.println(operation + "=" + result);
-		
-		return this.result;
+		return result;
 	}
 	
 	/**
 	 * Match an operator to valid calculation.
 	 * 
-	 * @param number 	the parameter of calculation
+	 * @param left 		the left parameter of calculation
+	 * @param right 	the right parameter of calculation
 	 * @param operator	the operator used in calculation
 	 */
-	private void operate( int number, String operator) {
+	private double operate( double left, double right, String operator) {      	      	
+      	double result = left;
 		switch (operator) {
-			case "+": {
-				this.result += number;
-				break;
-			}
-			case "-": {
-				this.result -= number;
-				break;
-			}
-			case "/": {
-				this.result /= number;
-				break;
-			}
-			case "*": {
-				this.result *= number;
-				break;
-			}
-			default : {
-				System.out.println("Incorrect operation !");
-				break;
-			}
+			case "+": result += right; break;
+			case "-": result -= right; break;
+			case "/": result /= right; break;
+			case "*": result *= right; break;
+			default : System.out.println("Incorrect operation: " + operator); break;
 		}
-
+      	return result;
 	}
-	
 }
