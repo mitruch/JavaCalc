@@ -3,12 +3,22 @@ import java.io.FileNotFoundException;
 
 /**
  * 
- * @author mitruch
- *
+ * @author Katarzyna Mitrus
+ * 
+ * Java programming exercises. 
+ * Implementation of simple calculator 
+ * witch reads parameters from file and from user.
+ * 
  */
 public class Main {
+	/**
+	 * Show menu and navigate it.
+	 */
 	public static void showMenu() {
 		
+		/**
+		 * 
+		 */
 		Scanner keyboard = new Scanner(System.in);
 		String choice;
 		boolean isEnd = true;
@@ -25,13 +35,14 @@ public class Main {
 					 Calculator calc = new Calculator();
 					 String operation;
 					 do {
-						 System.out.println("Write what You need to calculate:  ");
+						 System.out.println("Write what You need to calculate or 'end' to see menu:  ");
 						 operation = keyboard.nextLine();
 						 if(!operation.equals("end")){
 							 calc.calculate(operation);
 						 }
 					  } while (!operation.endsWith("end"));
 					showMenu();
+					keyboard.close();
 					isEnd = true;
 					break;
 				} 
@@ -46,6 +57,7 @@ public class Main {
 						e.printStackTrace();
 					}
 					showMenu();
+					keyboard.close();
 					isEnd = true;
 					break;
 				}
@@ -64,10 +76,11 @@ public class Main {
 	
 		} while (!isEnd);
 	}
-
+	
 	/**
+	 * The main method where menu is shown.
 	 * 
-	 * @param args
+	 * @param args	the command line arguments
 	 */
 	public static void main(String[] args) {
 			showMenu();
