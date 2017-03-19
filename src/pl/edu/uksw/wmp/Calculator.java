@@ -35,7 +35,7 @@ public class Calculator implements Readable {
 	/**
 	 * The overload method based on recursive rules.
 	 * 
-	 * @param 	operation
+	 * @param 	operation 	the algebraic expression
 	 * @return	call overload method double calculate(String,String) 
 	 */
 	public double calculate(String operation) {
@@ -47,7 +47,7 @@ public class Calculator implements Readable {
 	 * 
 	 * @param operation 	the algebraic expression
 	 * @param delim			the delimiters witch delimit numbers 
-	 * @return 				result of math operations
+	 * @return				result of math operations
 	 */
 	private double calculate(String operation, String delim) {		    		
       	double result = 0.0;
